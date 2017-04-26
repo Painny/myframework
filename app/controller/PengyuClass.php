@@ -7,8 +7,8 @@
  */
 class Pengyu extends Controller{
 
-    function say($str){
-        echo $str;
+    function say(){
+        echo "hello";
     }
 
 }
