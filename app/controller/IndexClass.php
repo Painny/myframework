@@ -5,10 +5,11 @@
  * Date: 2017/4/26
  * Time: 16:58
  */
-class Pengyu extends Controller{
+class Index extends Controller{
 
-    function say(){
-        echo "hello";
+    function index(){
+        echo "hello!";
     }
+
 
 }

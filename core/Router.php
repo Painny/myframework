@@ -18,15 +18,22 @@ class Router{
         self::$protocol=$_SERVER["REQUEST_SCHEME"];
         self::$domain=$_SERVER["SERVER_NAME"];
         self::$port=$_SERVER["SERVER_PORT"];
+        //用于储存控制器和方法
+        $path_arr=array();
         if(isset($_SERVER["PATH_INFO"]) && !empty($_SERVER["PATH_INFO"])){
-            $path_arr=explode("/",$_SERVER["PATH_INFO"]);
+            $path=trim("/",$_SERVER["PATH_INFO"]);
+            if($path!=""){
+                $path_arr=explode("/",$path);
+            }
         }else{
             if(strpos($_SERVER["REQUEST_URI"],"?")!==false){
                 $path=trim(substr($_SERVER["REQUEST_URI"],0,strpos($_SERVER["REQUEST_URI"],"?")),"/");
             }else{
                 $path=trim($_SERVER["REQUEST_URI"],"/");
             }
-            $path_arr=strpos($_SERVER["REQUEST_URI"],"/")!==false?explode("/",$path):array();
+            if($path!=""){
+                $path_arr=explode("/",$path);
+            }
         }
         switch (count($path_arr)){
             case 3:
