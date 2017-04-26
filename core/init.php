@@ -40,6 +40,7 @@ setcookie(session_name(),session_id(),time()+cfg("cookie_expire"),$cookie_parame
 
 //路由初始化
 Router::init();
+//执行路由地址
 Router::run();
 
 
