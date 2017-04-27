@@ -14,6 +14,7 @@ class Router{
     static public $mtd=null;
     static public $query=array();
     //初始化
+    //匹配url www.xxx.com/index/index?a=1   www.xxx.com/index.php/index/index  www.xxx.com/
     static function init(){
         self::$protocol=$_SERVER["REQUEST_SCHEME"];
         self::$domain=$_SERVER["SERVER_NAME"];

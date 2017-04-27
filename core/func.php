@@ -29,3 +29,24 @@ function vendor($dirname,$filename){
     }
     require_once $file;
 }
+
+//生成url  http://www.xx.com/aa/b?x=1&y=2
+function url($ctr,$mtd,$query=array()){
+    if(!Router::$port=="80" && !Router::$port==""){
+        $url=Router::$protocol."://".Router::$domain."/".strtolower($ctr)."/".strtolower($mtd);
+    }else{
+        $url=Router::$protocol."://".Router::$domain.":".Router::$port."/".strtolower($ctr)."/".strtolower($mtd);
+    }
+    if(count($query)){
+        $url.="?".http_build_query($query);
+    }
+    return $url;
+}
+
+//跳转url
+function jump($url){
+    $scheme=cfg("request_scheme");
+    if(strpos($url,"http://")===false && strpos($url,"https://")===false)
+        $url=$scheme."://".$url;
+    header("location:".$url);
+}

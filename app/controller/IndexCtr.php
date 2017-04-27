@@ -6,18 +6,17 @@
  * Time: 16:58
  */
 class Index extends Controller{
-    function __construct()
-    {
+    function __construct(){}
 
-    }
     function index(){
-        echo "index";
+        echo "<center><h1>Welcome to use this framework!</h1></center>";
+        phpinfo();
     }
-    function say(){
-        vendor("say","say.php");
-        $say=new Say();
-        $say->sayhello();
+
+    function test(){
+        jump("www.baidu.com");
     }
+
 
 
 }
