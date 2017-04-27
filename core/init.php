@@ -15,11 +15,22 @@ require_once CORE_PATH."Router.php";
 require_once CORE_PATH."func.php";
 //载入基础控制器
 require_once CORE_PATH."Controller.php";
-
-//定义自动加载
+//定义公共文件目录
+define("COMMON_PATH",ROOT_PATH.cfg("common_dir").DIR_SEP);
+//定义三方库目录
+define("VENDOR_PATH",ROOT_PATH.cfg("vendor_dir").DIR_SEP);
+//定义自动加载(从应用目录和公共目录匹配)
 function __autoload($class){
+    //优先从应用目录匹配
     $dir=APP_PATH.cfg("ctr_dir_name").DIR_SEP;
-    $file=$dir.ucfirst($class)."Class.php";
+    $file=$dir.ucfirst($class)."Ctr.php";
+    if(file_exists($file) && is_readable($file)){
+        require_once $file;
+        return;
+    }
+    //从公共目录匹配
+    $dir=COMMON_PATH.cfg("ctr_dir_name").DIR_SEP;
+    $file=$dir.ucfirst($class)."Ctr.php";
     if(!file_exists($file) || !is_readable($file)){
         exit("file not exists:".$file);
     }
