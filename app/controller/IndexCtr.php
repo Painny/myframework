@@ -14,7 +14,7 @@ class Index extends Controller{
     }
 
     function test(){
-        jump("www.baidu.com");
+
     }
 
 

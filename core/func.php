@@ -50,3 +50,13 @@ function jump($url){
         $url=$scheme."://".$url;
     header("location:".$url);
 }
+
+//删除当前session
+function drop_session($flag=false){
+    if($flag){  //是否删除cookie
+        $cookie_parames=session_get_cookie_params();
+        setcookie(session_name(),"",time()-3600,$cookie_parames["path"],Router::$domain,$cookie_parames["secure"],$cookie_parames["httponly"]);
+    }
+    unset($_SESSION);
+    session_destroy();
+}
