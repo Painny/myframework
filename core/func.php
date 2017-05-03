@@ -51,6 +51,16 @@ function jump($url){
     header("location:".$url);
 }
 
+//获取当前host(包含http://)
+function host(){
+    if(!Router::$port=="80" && !Router::$port==""){
+        $host=Router::$protocol."://".Router::$domain;
+    }else{
+        $host=Router::$protocol."://".Router::$domain.":".Router::$port;
+    }
+    return $host;
+}
+
 //删除当前session
 function drop_session($flag=false){
     if($flag){  //是否删除cookie
@@ -59,4 +69,9 @@ function drop_session($flag=false){
     }
     unset($_SESSION);
     session_destroy();
+}
+
+//获取模板目录
+function tpt_dir(){
+    return cfg("tpl_dir_name")?host()."/".cfg("tpl_dir_name"):host()."/"."tpt";
 }

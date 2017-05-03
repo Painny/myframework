@@ -39,7 +39,7 @@ abstract class Controller{
     //显示模板
     function display_view($tpl,$data=null){
         $this->view_data=$data;
-        $file=APP_PATH.cfg("tpl_dir_name").DIR_SEP.$tpl;
+        $file=ROOT_PATH.cfg("tpl_dir_name").DIR_SEP.$tpl;
         header("Content-type: text/html");
         if(!file_exists($file) || !is_readable($file)){
             $file=APP_PATH.cfg("tpl_dir_name").DIR_SEP.cfg("tpl_not_file");

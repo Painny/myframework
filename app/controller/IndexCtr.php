@@ -14,7 +14,8 @@ class Index extends Controller{
     }
 
     function test(){
-
+        $this->display_view("test.html");
+//        $this->display_data(0,"sasasasasa");
     }
 
 
