@@ -37,6 +37,8 @@ function __autoload($class){
     require_once $file;
 }
 
+//设置默认时区
+date_timezone_set('Asia/Shanghai');
 //初始化session
 session_name(cfg("session_name"));
 if(isset($_REQUEST[cfg("session_sign")])){
