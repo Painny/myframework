@@ -38,7 +38,7 @@ function __autoload($class){
 }
 
 //设置默认时区
-date_timezone_set('Asia/Shanghai');
+date_default_timezone_set('Asia/Shanghai');
 //初始化session
 session_name(cfg("session_name"));
 if(isset($_REQUEST[cfg("session_sign")])){
