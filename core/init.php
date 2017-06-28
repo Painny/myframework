@@ -7,8 +7,6 @@
  */
 //载入配置
 $CONF=require_once CORE_PATH."config.php";
-//载入错误配置
-$ERROR=require_once APP_PATH."error.php";
 //载入路由类
 require_once CORE_PATH."Router.php";
 //载入函数库
@@ -19,10 +17,11 @@ require_once CORE_PATH."Controller.php";
 define("COMMON_PATH",ROOT_PATH.cfg("common_dir").DIR_SEP);
 //定义三方库目录
 define("VENDOR_PATH",ROOT_PATH.cfg("vendor_dir").DIR_SEP);
+
 //定义自动加载(从应用目录和公共目录匹配)
 function __autoload($class){
     //优先从应用目录匹配
-    $dir=APP_PATH.cfg("ctr_dir_name").DIR_SEP;
+    $dir=APP_PATH.DIR_SEP.cfg("ctr_dir_name").DIR_SEP;
     $file=$dir.ucfirst($class).".php";
     if(file_exists($file) && is_readable($file)){
         require_once $file;
@@ -36,6 +35,8 @@ function __autoload($class){
     }
     require_once $file;
 }
+//路由初始化
+Router::init();
 
 //设置默认时区
 date_default_timezone_set('Asia/Shanghai');
@@ -51,8 +52,7 @@ session_start();
 $cookie_parames=session_get_cookie_params();
 setcookie(session_name(),session_id(),time()+cfg("cookie_expire"),$cookie_parames["path"],Router::$domain,$cookie_parames["secure"],$cookie_parames["httponly"]);
 
-//路由初始化
-Router::init();
+
 //执行路由地址
 Router::run();
 

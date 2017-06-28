@@ -14,11 +14,12 @@ return array(
     "session_sign"  =>  "stoken",       //浏览器禁用cookie时传送sessionid的表示字段
     "cookie_expire" =>  3600*24*7,      //cookie生命周期 单位秒
     "session_expire"=>  60*24*7,        //session生命周期 单位分
-    "default_ctr"   =>  "Index",        //默认控制器
+    "default_ctr"   =>  "IndexCtr",        //默认控制器
     "default_mtd"   =>  "index",        //默认方法
     "common_dir"    =>  "common",       //公共目录
     "vendor_dir"    =>  "vendor",       //三方库目录
     "upload_dir"    =>  "attachment",   //上传文件等附件目录
     "static_dir"    =>  "public",       //静态文件目录
     "request_scheme"=>  "http",         //默认请求使用协议
+    "default_app"   =>  "app",          //默认应用板块
 );
