@@ -7,7 +7,6 @@
  */
 abstract class Controller{
     public $view_data=null;  //模板数据
-    abstract function __construct();
     //访问没有的方法
     function __call($name, $arguments)
     {

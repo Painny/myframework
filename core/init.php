@@ -23,14 +23,14 @@ define("VENDOR_PATH",ROOT_PATH.cfg("vendor_dir").DIR_SEP);
 function __autoload($class){
     //优先从应用目录匹配
     $dir=APP_PATH.cfg("ctr_dir_name").DIR_SEP;
-    $file=$dir.ucfirst($class)."Ctr.php";
+    $file=$dir.ucfirst($class).".php";
     if(file_exists($file) && is_readable($file)){
         require_once $file;
         return;
     }
     //从公共目录匹配
     $dir=COMMON_PATH.cfg("ctr_dir_name").DIR_SEP;
-    $file=$dir.ucfirst($class)."Ctr.php";
+    $file=$dir.ucfirst($class).".php";
     if(!file_exists($file) || !is_readable($file)){
         exit("file not exists:".$file);
     }
