@@ -10,7 +10,7 @@ class Router{
     static public $protocol="http";
     static public $domain=null;
     static public $port="80";
-    static public $ctr="Index";
+    static public $ctr="IndexCtr";
     static public $mtd="index";
     static public $query=array();
     //初始化
@@ -38,10 +38,10 @@ class Router{
         switch (count($path_arr)){
             case 3:
             case 2:
-                self::$ctr=$path_arr[0];
+                self::$ctr=ucfirst($path_arr[0])."Ctr";
                 self::$mtd=$path_arr[1];break;
             case 1:
-                self::$ctr=$path_arr[0];
+                self::$ctr=ucfirst($path_arr[0])."Ctr";
         }
         if(strpos($_SERVER["REQUEST_URI"],"&")!==false){
             self::$query=explode("&",$_SERVER["QUERY_STRING"]);
