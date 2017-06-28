@@ -5,9 +5,9 @@
  * Date: 2017/4/26
  * Time: 17:08
  */
-class Controller{
+abstract class Controller{
     public $view_data=null;  //模板数据
-
+    abstract function __construct();
     //访问没有的方法
     function __call($name, $arguments)
     {
@@ -32,21 +32,19 @@ class Controller{
         if($code===0){
             echo json_encode(array("code"=>$code,"body"=>$data));
         }else{
-            $error=error_info($code);
-            echo json_encode(array("code"=>$code,"error"=>$error));
+            echo json_encode(array("code"=>$code,"error"=>error_info($code)));
         }
     }
 
     //显示模板
     function display_view($tpl,$data=null){
         $this->view_data=$data;
-        $file=APP_PATH.cfg("tpl_dir_name").DIR_SEP.$tpl;
+        $file=ROOT_PATH.cfg("tpl_dir_name").DIR_SEP.$tpl;
         header("Content-type: text/html");
         if(!file_exists($file) || !is_readable($file)){
-            require_once APP_PATH.cfg("tpl_dir_name").DIR_SEP.cfg("tpl_not_file");
-        }else{
-            require_once APP_PATH.cfg("tpl_dir_name").DIR_SEP.$tpl;
+            $file=APP_PATH.cfg("tpl_dir_name").DIR_SEP.cfg("tpl_not_file");
         }
+        require_once $file;
     }
 
 
