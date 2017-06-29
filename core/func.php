@@ -18,8 +18,7 @@ function cfg($key,$val=null){
 //获取错误信息
 function error_info($code){
     //载入错误配置
-    $ERROR=require_once APP_PATH."error.php";
-    global $ERROR;
+    $ERROR=require_once APP_PATH.DIR_SEP."error.php";
     return isset($ERROR[$code])?$ERROR[$code]:"unknown mistake";
 }
 

@@ -8,7 +8,7 @@
 class IndexCtr extends Controller{
 
     function index(){
-        echo "admin index";
+        $this->display_data(2,"ok");
     }
 
 

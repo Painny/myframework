@@ -40,12 +40,12 @@ class Router{
         switch (count($path_arr)){
             case 3:
                 self::$app=ucfirst($path_arr[0]);
-                self::$ctr=ucfirst($path_arr[1]);
+                self::$ctr=ucfirst($path_arr[1])."Ctr";
                 self::$mtd=$path_arr[2];
                 break;
             case 2:
                 self::$app=ucfirst($path_arr[0]);
-                self::$ctr=ucfirst($path_arr[1]);
+                self::$ctr=ucfirst($path_arr[1])."Ctr";
                 self::$mtd=cfg("default_mtd");
                 break;
             case 1:
@@ -70,7 +70,7 @@ class Router{
         }else{
             define("APP_PATH",self::$app);
         }
-        $ctr=$ctr!==null?$ctr."Ctr":self::$ctr."Ctr";
+        $ctr=$ctr!==null?$ctr."Ctr":self::$ctr;
         $mtd=$mtd!==null?$mtd:self::$mtd;
         $obj=new $ctr();
         $obj->$mtd();
