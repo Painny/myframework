@@ -31,7 +31,7 @@ abstract class Controller{
         if($code===0){
             echo json_encode(array("code"=>$code,"body"=>$data));
         }else{
-            echo json_encode(array("code"=>$code,"error"=>error_info($code)));
+            echo json_encode(array("code"=>$code,"error"=>error_info($code),"info"=>$data));
         }
     }
 

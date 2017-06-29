@@ -8,7 +8,7 @@
 class IndexCtr extends Controller{
 
     function index(){
-        $this->display_data(2,"ok");
+        $this->display_data(0,["a"=>1,"b"=>["x"=>2,"y"=>333]]);
     }
 
 
