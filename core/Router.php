@@ -39,17 +39,17 @@ class Router{
         }
         switch (count($path_arr)){
             case 3:
-                self::$app=ucfirst($path_arr[0]);
-                self::$ctr=ucfirst($path_arr[1])."Ctr";
+                self::$app=strtolower($path_arr[0]);
+                self::$ctr=ucfirst(strtolower($path_arr[1]))."Ctr";
                 self::$mtd=$path_arr[2];
                 break;
             case 2:
-                self::$app=ucfirst($path_arr[0]);
-                self::$ctr=ucfirst($path_arr[1])."Ctr";
+                self::$app=strtolower($path_arr[0]);
+                self::$ctr=ucfirst(strtolower($path_arr[1]))."Ctr";
                 self::$mtd=cfg("default_mtd");
                 break;
             case 1:
-                self::$app=ucfirst($path_arr[0]);
+                self::$app=strtolower($path_arr[0]);
                 self::$ctr=cfg("default_ctr");
                 self::$mtd=cfg("default_mtd");
                 break;
@@ -66,9 +66,9 @@ class Router{
     //执行路由
     static function run($ctr=null,$mtd=null){
         if(!self::$app){
-            define("APP_PATH",cfg("default_app"));
+            define("APP_PATH",ROOT_PATH.cfg("default_app"));
         }else{
-            define("APP_PATH",self::$app);
+            define("APP_PATH",ROOT_PATH.self::$app);
         }
         $ctr=$ctr!==null?$ctr."Ctr":self::$ctr;
         $mtd=$mtd!==null?$mtd:self::$mtd;

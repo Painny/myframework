@@ -41,7 +41,7 @@ abstract class Controller{
         $file=ROOT_PATH.cfg("tpl_dir_name").DIR_SEP.$tpl;
         header("Content-type: text/html");
         if(!file_exists($file) || !is_readable($file)){
-            $file=APP_PATH.cfg("tpl_dir_name").DIR_SEP.cfg("tpl_not_file");
+            $file=ROOT_PATH.cfg("tpl_dir_name").DIR_SEP.cfg("tpl_not_find");
         }
         require_once $file;
     }
