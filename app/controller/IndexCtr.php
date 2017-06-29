@@ -10,7 +10,9 @@ class IndexCtr extends Controller{
     function index(){
         echo "<center><h1>Welcome to use this framework!</h1></center>";
     }
-
+    function test(){
+        echo "test function";
+    }
 
 
 }
