@@ -22,11 +22,12 @@ class Router{
         //用于储存控制器和方法
         $path_arr=array();
         if(isset($_SERVER["PATH_INFO"]) && !empty($_SERVER["PATH_INFO"])){
-            $path=trim("/",$_SERVER["PATH_INFO"]);
+            $path=trim($_SERVER["PATH_INFO"],"/");
             if($path!=""){
                 $path_arr=explode("/",$path);
             }
         }else{
+            echo "b";
             if(strpos($_SERVER["REQUEST_URI"],"?")!==false){
                 $path=trim(substr($_SERVER["REQUEST_URI"],0,strpos($_SERVER["REQUEST_URI"],"?")),"/");
             }else{
@@ -69,7 +70,7 @@ class Router{
         }else{
             define("APP_PATH",self::$app);
         }
-        $ctr=$ctr!==null?$ctr:self::$ctr;
+        $ctr=$ctr!==null?$ctr."Ctr":self::$ctr."Ctr";
         $mtd=$mtd!==null?$mtd:self::$mtd;
         $obj=new $ctr();
         $obj->$mtd();
