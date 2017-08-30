@@ -8,10 +8,11 @@
 class IndexCtr extends Controller{
 
     function index(){
-        echo "<center><h1>Welcome to use this framework!</h1></center>";
+        echo "<h1>Welcome to use this framework!</h1>";
     }
     function test(){
-        $this->display_view("errosr.html","ssss");
+        $Dd=new Db();
+        var_dump($Dd);
     }
 
 

@@ -13,6 +13,8 @@ require_once CORE_PATH."Router.php";
 require_once CORE_PATH."func.php";
 //载入基础控制器
 require_once CORE_PATH."Controller.php";
+//引入数据库类
+require_once CORE_PATH."Db.php";
 //定义公共文件目录
 define("COMMON_PATH",ROOT_PATH.cfg("common_dir").DIR_SEP);
 //定义三方库目录
@@ -51,7 +53,6 @@ session_start();
 //设置cookie生命周期
 $cookie_parames=session_get_cookie_params();
 setcookie(session_name(),session_id(),time()+cfg("cookie_expire"),$cookie_parames["path"],Router::$domain,$cookie_parames["secure"],$cookie_parames["httponly"]);
-
 
 //执行路由地址
 Router::run();

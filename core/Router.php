@@ -27,7 +27,6 @@ class Router{
                 $path_arr=explode("/",$path);
             }
         }else{
-            echo "b";
             if(strpos($_SERVER["REQUEST_URI"],"?")!==false){
                 $path=trim(substr($_SERVER["REQUEST_URI"],0,strpos($_SERVER["REQUEST_URI"],"?")),"/");
             }else{
@@ -72,6 +71,7 @@ class Router{
         }
         $ctr=$ctr!==null?$ctr."Ctr":self::$ctr;
         $mtd=$mtd!==null?$mtd:self::$mtd;
+    
         $obj=new $ctr();
         $obj->$mtd();
     }
