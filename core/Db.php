@@ -1,7 +1,7 @@
 <?php
 //数据库操作类
 class Db {
-    private $DB=null;  //数据库实例化
+    private static $DB=null;  //数据库实例
     function __construct(){
         if($this->DB==null){
             $dbms=cfg("db_type");
@@ -17,7 +17,7 @@ class Db {
     }
 
     function find(){
-        
+
     }
 
 

@@ -11,8 +11,7 @@ class IndexCtr extends Controller{
         echo "<h1>Welcome to use this framework!</h1>";
     }
     function test(){
-        $Dd=new Db();
-        var_dump($Dd);
+        $Dd1=new Db();
     }
 
 
