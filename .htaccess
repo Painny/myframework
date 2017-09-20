@@ -1,8 +1,5 @@
 
-Require all granted
-
-RewriteEngine On
-#  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteEngine On
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_URI} !^.*(.css|.js|.gif|.png|.jpg|.jpeg|.ico)
-  RewriteRule ^(.*)$ index.php/$1 [QSA,PT,L]
+  RewriteRule ^(.*)$ index.php/$1 [QSA]
