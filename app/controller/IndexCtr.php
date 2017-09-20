@@ -11,7 +11,23 @@ class IndexCtr extends Controller{
         echo "<h1>Welcome to use this framework!</h1>";
     }
     function test(){
-        $Dd1=new Db();
+        $a="a:b>c<d";
+        $tmp=[$a];
+        $de=[":",">","<"];
+        $res=[];
+        foreach($de as $d){
+            foreach($tmp as $r){
+                if(strpos($r,$d)===false){
+                    continue;
+                }
+                $tmp=explode($d,$r);
+                $res=array_merge($res,$tmp);
+                var_dump($res);
+            }
+        }
+        var_dump($res);
+        //$Dd1=new Db();
+        //$Dd1->get("user:class","ucid=cid",["uname","uage","cname"],["AND"=>["uname"=>1,"uage"=>10]]);
     }
 
 
