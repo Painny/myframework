@@ -1,0 +1,14 @@
+{
+    "name": "pengyu/framework",
+    "description": "a light php framework",
+    "type": "framework",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pengyu",
+            "email": "917103429@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
