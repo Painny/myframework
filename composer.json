@@ -13,12 +13,14 @@
         "catfan/medoo": "dev-master"
     },
     "autoload": {
+        "files": [
+            "common/helper.php"
+        ],
         "classmap": [
             "core"
         ],
         "psr-4": {
-            "App\\": "app/",
-            "Core\\": "core/"
+            "App\\": "app/"
         }
     },
     "minimum-stability": "dev"
