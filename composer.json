@@ -9,8 +9,17 @@
             "email": "917103429@qq.com"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "catfan/medoo": "dev-master"
-    }
+    },
+    "autoload": {
+        "classmap": [
+            "core"
+        ],
+        "psr-4": {
+            "App\\": "app/",
+            "Core\\": "core/"
+        }
+    },
+    "minimum-stability": "dev"
 }
