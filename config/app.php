@@ -9,6 +9,5 @@ return array(
     'name'      =>  'test',
     'debug'     =>  true,
     'timezone'  =>  'Asia/Shanghai',
-    'key'       =>  'test',
-    'namespace' =>  'Pengyu\Framework'
+    'key'       =>  'test'
 );
