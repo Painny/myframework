@@ -7,8 +7,11 @@
  */
 namespace App\Controller;
 
-class Controller
+class Index
 {
-
+    public function test()
+    {
+        return "this is test";
+    }
 
 }
