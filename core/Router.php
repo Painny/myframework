@@ -7,7 +7,6 @@
  */
 namespace Core;
 
-require_once "../vendor/autoload.php";
 class Router
 {
     protected static $instance;
