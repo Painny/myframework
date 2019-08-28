@@ -7,6 +7,7 @@
  */
 namespace Core;
 
+require_once "../vendor/autoload.php";
 class Router
 {
     protected static $instance;
@@ -90,31 +91,36 @@ class Router
             $url=trim($url,"/");
         }
 
-        foreach ($this->map as $expression => $item) {
-            if (preg_match_all($item["pattern"],$url,$matches)) {
-                if (!in_array($method,$item["method"])) {
+        foreach ($this->map as $expression => $route) {
+            if (preg_match_all($route["pattern"],$url,$matches)) {
+                if (!in_array($method,$route["method"])) {
                     continue;
                 }
-                $item["param"]=[];
+                $route["param"]=[];
                 if (count($matches) >= 2) {
                     unset($matches[0]);
                     foreach ($matches as $match) {
-                        $item["param"][]=$match[0];
+                        $route["param"][]=$match[0];
                     }
                 }
-                return $item;
+                return $route;
             }
         }
         return false;
     }
 
-    public function run()
+    //todo 目前没有中间件调用
+    public function dispatch($route)
     {
-
+        if ($route["action"] instanceof \Closure) {
+            return call_user_func_array($route["action"],$route["param"]);
+        } else {
+            $action=explode("@",$route["action"],2);
+            //todo 此处应该用ioc容器来实例化控制器
+            $ctl=new $action[0];
+            return call_user_func_array([$ctl,$action[1]],$route["param"]);
+        }
     }
 
 }
 
-$router=Router::getInstance();
-$router->add("book/[s]/info/[id]/s","test","GET");
-var_dump($router->match("book/2/info/3/s","GET"));
