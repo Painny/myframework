@@ -17,10 +17,9 @@ class Router
 
     const METHODS=['GET','POST','DELETE','PUT'];
 
-    //todo 有问题
     const PATTERN=[
-        '/\[[^\?]+\]/'  =>  '(.+)',
-        '/\[\?.+\]/'=>  '([^\/]+)?\/?'
+        '/\[[^\]]+\]\//'  =>  '([^\/]+)/',
+        '/\[[^\]]+\]/'  =>  '([^\/]+)',
     ];
 
     protected function __construct(){}
@@ -61,6 +60,10 @@ class Router
 
     public function add($expression,$action,$method="*")
     {
+        if ($expression !== "/") {
+            $expression=trim($expression,"/");
+        }
+
         if ($method == "*") {
             $method=self::METHODS;
         } else {
@@ -72,27 +75,39 @@ class Router
         $pattern=preg_replace(array_keys(self::PATTERN),self::PATTERN,$expression);
 
         $route=[
-            'action'    =>  self::$instance->namespace.$action,
+            'action'    =>  self::$instance->namespace.'\\'.$action,
             'method'    =>  $method,
-            'pattern'   =>  '/'.$pattern.'/'
+            'pattern'   =>  '/^'.$pattern.'$/'
         ];
 
         self::$instance->map[$expression]=$route;
     }
 
-    // /book/[id]/info   /book/1/info  todo
+    // /book/[id]/info   /book/1/info
     public function match($url,$method)
     {
+        if ($url !== "/") {
+            $url=trim($url,"/");
+        }
+
         foreach ($this->map as $expression => $item) {
-            if (preg_match($item["pattern"],$url,$matches)) {
-                if (in_array($method,$item["method"])) {
-                    return $item;
+            if (preg_match_all($item["pattern"],$url,$matches)) {
+                if (!in_array($method,$item["method"])) {
+                    continue;
                 }
+                $item["param"]=[];
+                if (count($matches) >= 2) {
+                    unset($matches[0]);
+                    foreach ($matches as $match) {
+                        $item["param"][]=$match[0];
+                    }
+                }
+                return $item;
             }
         }
         return false;
     }
-    
+
     public function run()
     {
 
@@ -101,5 +116,5 @@ class Router
 }
 
 $router=Router::getInstance();
-$router->add("book/[id]/info","test","GET");
-var_dump($router->match("book/2/info","GET"));
+$router->add("book/[s]/info/[id]/s","test","GET");
+var_dump($router->match("book/2/info/3/s","GET"));
