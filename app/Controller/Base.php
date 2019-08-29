@@ -8,6 +8,7 @@
 
 namespace App\Controller;
 
+
 use Medoo\Medoo;
 
 class Base
@@ -19,7 +20,7 @@ class Base
         $this->db=$db;
     }
 
-    public function end($data,$type="json")
+    public function end($data,$type=null)
     {
         if ($type == "json") {
             header("Content-Type: application/json");
@@ -29,6 +30,6 @@ class Base
             $data=json_encode($data);
         }
 
-        echo $data;
+        return $data;
     }
 }
