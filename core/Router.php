@@ -35,27 +35,38 @@ class Router
 
     public static function get($expression,$action)
     {
-        self::$instance->add($expression,$action,'GET');
+        self::getInstance()->add($expression,$action,'GET');
     }
 
     public static function post($expression,$action)
     {
-        self::$instance->add($expression,$action,'POST');
+        self::getInstance()->add($expression,$action,'POST');
     }
 
     public static function any($expression,$action)
     {
-        self::$instance->add($expression,$action);
+        self::getInstance()->add($expression,$action);
     }
 
     public static function delete($expression,$action)
     {
-        self::$instance->add($expression,$action,'DELETE');
+        self::getInstance()->add($expression,$action,'DELETE');
     }
 
     public static function put($expression,$action)
     {
-        self::$instance->add($expression,$action,'PUT');
+        self::getInstance()->add($expression,$action,'PUT');
+    }
+
+    public static function runMatch($url,$method)
+    {
+        $route=self::getInstance()->match($url,$method);
+        if (!$route) {
+            //todo
+            throw new \Exception("404 not found");
+        }
+
+        return self::$instance->dispatch($route);
     }
 
     public function add($expression,$action,$method="*")
@@ -115,8 +126,7 @@ class Router
             return call_user_func_array($route["action"],$route["param"]);
         } else {
             $action=explode("@",$route["action"],2);
-            //todo 此处应该用ioc容器来实例化控制器
-            $ctl=new $action[0];
+            $ctl=Container::get($action[0]);
             return call_user_func_array([$ctl,$action[1]],$route["param"]);
         }
     }
