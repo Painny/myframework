@@ -7,11 +7,18 @@
  */
 namespace App\Controller;
 
-class Index
+class Index extends Base
 {
+
     public function test()
     {
-        return "this is test";
+        $data=$this->db->select("user","*");
+        return $this->end(["code"=>0,"data"=>$data,"msg"=>"ok"]);
+    }
+
+    public function say($content)
+    {
+        return $this->end("content is ".$content);
     }
 
 }
