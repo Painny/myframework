@@ -71,7 +71,15 @@ class Router
 
     public static function clear()
     {
-        self::$instance->flush();
+        self::getInstance()->flush();
+    }
+
+    public static function load($filename)
+    {
+        if (!file_exists($filename)) {
+            return;
+        }
+        require_once $filename;
     }
 
     public function add($expression,$action,$method="*")
@@ -90,8 +98,11 @@ class Router
         //匹配的正则表达式
         $pattern=preg_replace(array_keys(self::PATTERN),self::PATTERN,$expression);
 
+        if (!$action instanceof \Closure) {
+            $action=self::$instance->namespace.'\\'.$action;
+        }
         $route=[
-            'action'    =>  self::$instance->namespace.'\\'.$action,
+            'action'    =>  $action,
             'method'    =>  $method,
             'pattern'   =>  '/^'.$pattern.'$/'
         ];
