@@ -10,7 +10,8 @@
         }
     ],
     "require": {
-        "catfan/medoo": "dev-master"
+        "catfan/medoo": "dev-master",
+        "pengyu/server": "dev-master"
     },
     "autoload": {
         "files": [
