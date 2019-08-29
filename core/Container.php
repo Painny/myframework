@@ -30,7 +30,7 @@ class Container
 
     public static function bind($abstract,$concrete)
     {
-        return self::$instance->bindTo($abstract,$concrete);
+        return self::getInstance()->bindTo($abstract,$concrete);
     }
 
     public function bindTo($abstract,$concrete)
@@ -40,12 +40,12 @@ class Container
         } else {
             $this->bindList[$abstract]=$concrete;
         }
-        return;
+        return true;
     }
 
-    public static function get($abstract)
+    public static function get($abstract,$param=[])
     {
-        return self::$instance->build($abstract);
+        return self::getInstance()->build($abstract,$param);
     }
 
     public function build($abstract,$param)
@@ -80,6 +80,10 @@ class Container
     {
         $reflection=new \ReflectionClass($abstract);
         $constructor=$reflection->getConstructor();
+
+        if (!$constructor) {
+            return $reflection->newInstance();
+        }
 
         if (!$constructor->isPublic()) {
             throw new \Exception("construct method is not public");
