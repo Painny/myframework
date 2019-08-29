@@ -69,6 +69,11 @@ class Router
         return self::$instance->dispatch($route);
     }
 
+    public static function clear()
+    {
+        self::$instance->flush();
+    }
+
     public function add($expression,$action,$method="*")
     {
         if ($expression !== "/") {
@@ -129,6 +134,11 @@ class Router
             $ctl=Container::get($action[0]);
             return call_user_func_array([$ctl,$action[1]],$route["param"]);
         }
+    }
+
+    public function flush()
+    {
+        $this->map=[];
     }
 
 }
