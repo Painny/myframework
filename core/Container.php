@@ -52,7 +52,7 @@ class Container
     {
         if (isset($this->bindInstance[$abstract])) {
             $obj=$this->bindInstance[$abstract];
-        } else if ($this->bindList[$abstract] instanceof \Closure) {
+        } else if (isset($this->bindList[$abstract]) && $this->bindList[$abstract] instanceof \Closure) {
             $obj=$this->invokeFunction($abstract,$param);
             $this->bindTo($abstract,$obj);
         } else {
