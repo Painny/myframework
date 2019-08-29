@@ -79,6 +79,7 @@ class Router
         if (!file_exists($filename)) {
             return;
         }
+
         require_once $filename;
     }
 
