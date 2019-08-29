@@ -51,12 +51,69 @@ class Container
     public function build($abstract,$param)
     {
         if (isset($this->bindInstance[$abstract])) {
-            return $this->bindInstance[$abstract];
+            $obj=$this->bindInstance[$abstract];
         } else if ($this->bindList[$abstract] instanceof \Closure) {
-            //todo 闭包 判断是否有参数需要生成
+            $obj=$this->invokeFunction($abstract,$param);
+            $this->bindTo($abstract,$obj);
         } else {
-            //todo 类名 判断是否存在，并且是否有参数需要生成
+            $obj=$this->invokeClass($abstract,$param);
+            $this->bindTo($abstract,$obj);
         }
+
+        return $obj;
+    }
+
+    protected function invokeFunction($abstract,$param)
+    {
+        $reflection=new \ReflectionFunction($abstract);
+
+        //是否需要参数
+        if ($reflection->getNumberOfParameters() == 0) {
+            return $reflection->invoke();
+        }
+
+        $args=$this->makeParam($reflection,$param);
+        return $reflection->invokeArgs($args);
+    }
+
+    protected function invokeClass($abstract,$param)
+    {
+        $reflection=new \ReflectionClass($abstract);
+        $constructor=$reflection->getConstructor();
+
+        if (!$constructor->isPublic()) {
+            throw new \Exception("construct method is not public");
+        }
+
+        $args=$this->makeParam($constructor,$param);
+
+        return $reflection->newInstanceArgs($args);
+    }
+
+    protected function makeParam($reflection,$vars)
+    {
+        $params=$reflection->getParameters();
+        $args=[];
+
+        foreach ($params as $key => $param) {
+            $class=$param->getClass();
+            if ($class) {
+                $className=$class->getName();
+                if (isset($vars[$key]) && $vars[$key] instanceOf $className) {
+                    $args[]=$vars[$key];
+                } else {
+                    $args[]=$this->build($param->getClass()->getName(),$vars);
+                }
+            } else if (isset($vars[$key])) {
+                $args[]=$vars[$key];
+            } else if($param->isDefaultValueAvailable ()) {
+                $args[]=$param->getDefaultValue();
+            } else {
+                throw new \Exception("miss param ".$param->getName());
+            }
+        }
+
+        return $args;
     }
 
 }
