@@ -56,6 +56,9 @@ class Container
             $obj=$this->invokeFunction($abstract,$param);
             $this->bindTo($abstract,$obj);
         } else {
+            if (isset($this->bindList[$abstract])) {
+                $abstract=$this->bindList[$abstract];
+            }
             $obj=$this->invokeClass($abstract,$param);
             $this->bindTo($abstract,$obj);
         }
