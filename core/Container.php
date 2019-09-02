@@ -35,7 +35,7 @@ class Container
 
     public function bindTo($abstract,$concrete)
     {
-        if (is_object($concrete)) {
+        if (is_object($concrete) && !$concrete instanceof \Closure) {
             $this->bindInstance[$abstract]=$concrete;
         } else {
             $this->bindList[$abstract]=$concrete;
@@ -68,7 +68,8 @@ class Container
 
     protected function invokeFunction($abstract,$param)
     {
-        $reflection=new \ReflectionFunction($abstract);
+        $closure=$this->bindList[$abstract];
+        $reflection=new \ReflectionFunction($closure);
 
         //是否需要参数
         if ($reflection->getNumberOfParameters() == 0) {
