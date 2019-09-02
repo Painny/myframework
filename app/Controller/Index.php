@@ -7,12 +7,14 @@
  */
 namespace App\Controller;
 
+use Core\Container;
+
 class Index extends Base
 {
 
     public function test()
     {
-        $data=$this->db->select("user","*");
+        $data=Container::get("DB")->select("user","*");
         return $this->end(["code"=>0,"data"=>$data,"msg"=>"ok"]);
     }
 
