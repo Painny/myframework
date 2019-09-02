@@ -9,16 +9,8 @@
 namespace App\Controller;
 
 
-use Medoo\Medoo;
-
 class Base
 {
-    protected $db;
-
-    public function __construct(Medoo $db)
-    {
-        $this->db=$db;
-    }
 
     public function end($data,$type=null)
     {
