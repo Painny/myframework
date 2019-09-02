@@ -10,6 +10,7 @@ return array(
     'name'      =>  'PHPSESSION',
     'expire'    =>  86400,
     'encrypt'   =>  false,
+    'autostart' =>  false,
     'handler'    =>  [
         'file'  =>  [
             'path'  =>  'runtime/session'
