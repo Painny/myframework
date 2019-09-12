@@ -18,7 +18,9 @@ require_once "../vendor/autoload.php";
         'port'          =>  config("db.port"),
         'username'      =>  config("db.user"),
         'password'      =>  config("db.password"),
-        'prefix'        =>  config("db.prefix")
+        'prefix'        =>  config("db.prefix"),
+        'charset'       =>  config("db.charset"),
+        'collation'     =>  config("db.collation")
     ]);
 });
 
