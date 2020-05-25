@@ -8,18 +8,18 @@
 
 require_once "vendor/autoload.php";
 
-$server=new Pengyu\Server\Worker\Server("http://0.0.0.0:8080");
+$server=new Pengyu\Server\Worker\Server("http://0.0.0.0:8081");
 
 $server->on("workerStart",function (){
     $database=new \Medoo\Medoo([
         'database_type' => 'mysql',
-        'database_name' => 'blog',
+        'database_name' => 'test',
         'server'        => 'localhost',
         'username'      => 'root',
         'password'      => 'root'
     ]);
 
-    \Core\Container::bind("Medoo\Medoo",$database);
+    \Core\Container::bind("DB",$database);
 
     \Core\Router::clear();
     \Core\Router::load("./route/web.php");
@@ -35,6 +35,7 @@ $server->on("request",function ($data,$response){
         if ($exception->getMessage() == "404 not found") {
             $response->status(404);
         }
+        $response->status(500);
         $response->end($exception->getMessage());
     }
 });
