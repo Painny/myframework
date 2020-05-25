@@ -9,5 +9,6 @@ return array(
     'name'      =>  'test',
     'debug'     =>  true,
     'timezone'  =>  'Asia/Shanghai',
-    'key'       =>  'test'
+    'key'       =>  'test',
+    'data_type' =>  'json'
 );

@@ -14,8 +14,14 @@ class Base
 
     public function end($data,$type=null)
     {
+        if (!$type) {
+            $type=config("app.data_type");
+        }
+
         if ($type == "json") {
             header("Content-Type: application/json");
+        } else {
+            header('Content-Type:text/html');
         }
 
         if (!is_string($data)) {

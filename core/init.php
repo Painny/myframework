@@ -38,8 +38,7 @@ try {
     $data=\Core\Router::runMatch($url[0],$method);
 } catch (Throwable $throwable) {
     http_response_code(500);
-    echo $throwable->getMessage();
-    return;
+    $data=$throwable->getMessage();
 }
 
 echo $data;

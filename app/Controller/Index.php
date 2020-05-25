@@ -14,7 +14,7 @@ class Index extends Base
 
     public function test()
     {
-        $data=Container::get("DB")->select("user","*");
+        $data=Container::get("DB")->select("user","*",["phone"=>"13990232056"]);
         return $this->end(["code"=>0,"data"=>$data,"msg"=>"ok"]);
     }
 
