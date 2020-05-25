@@ -90,7 +90,7 @@ class Container
         }
 
         if (!$constructor->isPublic()) {
-            throw new \Exception("construct method is not public");
+            throw new \Exception($reflection->getName()." construct method is not public");
         }
 
         $args=$this->makeParam($constructor,$param);
@@ -110,7 +110,7 @@ class Container
                 if (isset($vars[$key]) && $vars[$key] instanceOf $className) {
                     $args[]=$vars[$key];
                 } else {
-                    $args[]=$this->build($param->getClass()->getName(),$vars);
+                    $args[]=$this->build($className,$vars);
                 }
             } else if (isset($vars[$key])) {
                 $args[]=$vars[$key];
