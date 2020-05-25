@@ -14,7 +14,7 @@ $server->on("workerStart",function (){
     $database=new \Medoo\Medoo([
         'database_type' => 'mysql',
         'database_name' => 'test',
-        'server'        => 'localhost',
+        'server'        => '127.0.0.1',
         'username'      => 'root',
         'password'      => 'root'
     ]);
@@ -29,6 +29,7 @@ $server->on("request",function ($data,$response){
     $url=explode("?",$data["server"]["REQUEST_URI"],2);
     try {
         $result=\Core\Router::runMatch($url[0],$data["server"]["REQUEST_METHOD"]);
+        $response->header('Content-Type','application/json; charset=utf-8');
         $response->end($result);
     } catch (Exception $exception) {
         //todo 异常分类判断
